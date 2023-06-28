@@ -25,17 +25,35 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 // Add your functions below:
 
-const isValid = 'Is a valid credit card number!';
-const isUnvalid= 'Is not a valid credit card number';
+const isValidMessage = 'Is a valid credit card number!';
+const isUnvalidMessage= 'Is not a valid credit card number';
 
 
 
 const validateCred =(arr)=>{
-    for(let i = arr.length- 1; i >= 0; i--){
-      let j = arr[i] - '0';
-    }
+  const arrayReversed = arr.reverse();
+  return arrayReversed;
   
-  }
+  };
+
+const result = validateCred(valid1);
+console.log(result)
+
+
+
+// Function to check if it is a valid credit card number 
+const includesNumber = (arr)=> {
+  const isValid = result.every((num)=> arr.includes(num));
+    if( isValid ){
+      return isValidMessage;
+    } else{
+      return isUnvalidMessage;
+    }
+}
+
+const isIncluded = includesNumber(valid5);
+console.log(isIncluded)
+
   
 
 
