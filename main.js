@@ -29,36 +29,52 @@ const isValidMessage = 'Is a VALID credit card number!';
 const isInvalidMessage= 'Is NOT A VALID credit card number';
 
 
+
+
+
+
 //Remove the last element from the array, storing in a new array and reverse the array (now without the last digit).
-const rmvLastElement = (arr)=>{
-  const newArr = arr.slice();
-  newArr.pop();
-  newArr.reverse();
+
+
+const validateCred = (arr) => {
+  const newArr = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    const subArray = arr[i].slice();
+    subArray.pop();
+    subArray.reverse();
+    newArr.push(subArray);
+  }
+  //Multiply the digits in odd positions (e.g. first digit, third, fifth…etc) by 2. If the resulting number is over 9, subtract 9 from the number.
+  
+  for (let i = 0; i < newArr.length; i++) {
+    const arrayInception = newArr[i];
+    
+    for (let j = 0; j < arrayInception.length; j++) {
+      if (j % 2 === 0) {
+        let num = arrayInception[j] * 2;
+        
+        if (num > 9) {
+          num -= 9;
+        }
+        
+        arrayInception[j] = num;
+      }
+    }
+  }
+  
   return newArr;
 }
-const removedLast = rmvLastElement(valid1);
-console.log('is it removed?',removedLast);
 
 
-//Multiply the digits in odd positions (e.g. first digit, third, fifth…etc) by 2. If the resulting number is over 9, subtract 9 from the number.
-const validateCred =(arr)=>{
 
- for(let i = 0; i < arr.length; i++ ){
-  if( i % 2 === 0){
-    let num = arr[i] * 2;
-    if(num > 9){
-      num -= 9;
-    }
-    arr[i] = num;
-  }
- 
- }
-  
-}
- validateCred(removedLast);
- //output without >9 [resut [0, 8, 12, 1,  0, 8, 0, 9, 14, 7, 12, 9,  6, 5,  8]]
-// console.log('resut',removedLast)
+const result = validateCred(batchs);
+//  //output without >9 [resut [0, 8, 12, 1,  0, 8, 0, 9, 14, 7, 12, 9,  6, 5,  8]]
+//  //output result resut [0, 8, 3, 1, 0, 8,0, 9, 5, 7, 3, 9,6, 5, 8]
+console.log('resut',result);
 
+// //Add up all the numbers in the array as well as the dropped digit from step 1. If the sum modulo 10 is 0 then the array contains a valid number. Conversely, if the result is any number but 0, then the array contains an invalid number.
+// const arrFilter = removedLast;
 
 
 
