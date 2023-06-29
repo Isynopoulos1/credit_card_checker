@@ -20,40 +20,84 @@ const mystery4 = [4, 9, 2, 9, 8, 7, 7, 1, 6, 9, 2, 1, 7, 0, 9, 3]
 const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3]
 
 // An array of all the arrays above
-const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]
+const batchs = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]
 
 
 // Add your functions below:
 
-const isValidMessage = 'Is a valid credit card number!';
-const isUnvalidMessage= 'Is not a valid credit card number';
+const isValidMessage = 'Is a VALID credit card number!';
+const isInvalidMessage= 'Is NOT A VALID credit card number';
 
-
-
-const validateCred =(arr)=>{
-  const arrayReversed = arr.reverse();
-  return arrayReversed;
-  
-  };
-
-const result = validateCred(valid1);
-console.log(result)
-
-
-
-// Function to check if it is a valid credit card number 
-const includesNumber = (arr)=> {
-  const isValid = result.every((num)=> arr.includes(num));
-    if( isValid ){
-      return isValidMessage;
-    } else{
-      return isUnvalidMessage;
+const validateCred = (arr)=> {
+  const newArr=[];
+  let index = 0;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const num = arr[i];
+    if((index + 1) % 2 === 1){
+      newArr.push(num * 2) ;
+    }else{
+      newArr.push(num) ;
     }
+    // ADD ONE MORE VALUE TO INDEX FOR ITERATION
+    index++
+
+  }
+  return newArr
 }
 
-const isIncluded = includesNumber(valid5);
-console.log(isIncluded)
+for (let index = 0; index < batchs.length; index++) {
+  const batch = batchs[index];
+  const isIncluded = validateCred(batch);
 
-  
+  console.log('ORIGINAL ARRAY',batch)
+  console.log('multiplying',isIncluded)
+}
 
 
+
+
+
+
+
+
+// // Function to check if it is a valid credit card number 
+// const includesNumber = (arr)=> {
+//   const isValid = result.every((num)=> arr.includes(num));
+//     if( isValid ){
+//       return isValidMessage;
+//     } else{
+//       return isUnvalidMessage;
+//     }
+// }
+
+// const isIncluded = includesNumber(batch[0]);
+// // console.log(isIncluded)
+
+// //Function to multiply just the pair numbers in the matrix
+
+// const pairNumbers = (arr)=> arr.map(( num, index) =>{ 
+//   if((index +1) % 2 === 0){
+//     return num * 2;
+//   }else{
+//     return num;
+//   }
+// });
+
+// const resultPairNumbers = pairNumbers(batch[0]);
+// console.log(batch[0])
+// // console.log('Pair numbersss',resultPairNumbers)
+
+
+// // Function to subtract greater values than 9
+// const substractGreaterValues = ()=>{
+//   const newArr= [];
+//   resultPairNumbers.map(element => {
+//   if(element > 9){
+//     return newArr.push(element -9)
+//   }
+// });
+// return newArr;
+// };
+
+// const isGreat = substractGreaterValues();
+// console.log('IS GREAT',isGreat);
