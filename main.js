@@ -28,30 +28,36 @@ const batchs = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inva
 const isValidMessage = 'Is a VALID credit card number!';
 const isInvalidMessage= 'Is NOT A VALID credit card number';
 
-const validateCred = (arr)=> {
-  const newArr=[];
-  let index = 0;
-  for (let i = arr.length - 1; i >= 0; i--) {
-    const num = arr[i];
-    if((index + 1) % 2 === 1){
-      newArr.push(num * 2) ;
-    }else{
-      newArr.push(num) ;
+
+//Remove the last element from the array, storing in a new array and reverse the array (now without the last digit).
+const rmvLastElement = (arr)=>{
+  const newArr = arr.slice();
+  newArr.pop();
+  newArr.reverse();
+  return newArr;
+}
+const removedLast = rmvLastElement(valid1);
+console.log('is it removed?',removedLast);
+
+
+//Multiply the digits in odd positions (e.g. first digit, third, fifth…etc) by 2. If the resulting number is over 9, subtract 9 from the number.
+const validateCred =(arr)=>{
+
+ for(let i = 0; i < arr.length; i++ ){
+  if( i % 2 === 0){
+    let num = arr[i] * 2;
+    if(num > 9){
+      num -= 9;
     }
-    // ADD ONE MORE VALUE TO INDEX FOR ITERATION
-    index++
-
+    arr[i] = num;
   }
-  return newArr
+ 
+ }
+  
 }
-
-for (let index = 0; index < batchs.length; index++) {
-  const batch = batchs[index];
-  const isIncluded = validateCred(batch);
-
-  console.log('ORIGINAL ARRAY',batch)
-  console.log('multiplying',isIncluded)
-}
+ validateCred(removedLast);
+ //output without >9 [resut [0, 8, 12, 1,  0, 8, 0, 9, 14, 7, 12, 9,  6, 5,  8]]
+// console.log('resut',removedLast)
 
 
 
@@ -60,44 +66,7 @@ for (let index = 0; index < batchs.length; index++) {
 
 
 
-// // Function to check if it is a valid credit card number 
-// const includesNumber = (arr)=> {
-//   const isValid = result.every((num)=> arr.includes(num));
-//     if( isValid ){
-//       return isValidMessage;
-//     } else{
-//       return isUnvalidMessage;
-//     }
-// }
-
-// const isIncluded = includesNumber(batch[0]);
-// // console.log(isIncluded)
-
-// //Function to multiply just the pair numbers in the matrix
-
-// const pairNumbers = (arr)=> arr.map(( num, index) =>{ 
-//   if((index +1) % 2 === 0){
-//     return num * 2;
-//   }else{
-//     return num;
-//   }
-// });
-
-// const resultPairNumbers = pairNumbers(batch[0]);
-// console.log(batch[0])
-// // console.log('Pair numbersss',resultPairNumbers)
 
 
-// // Function to subtract greater values than 9
-// const substractGreaterValues = ()=>{
-//   const newArr= [];
-//   resultPairNumbers.map(element => {
-//   if(element > 9){
-//     return newArr.push(element -9)
-//   }
-// });
-// return newArr;
-// };
 
-// const isGreat = substractGreaterValues();
-// console.log('IS GREAT',isGreat);
+
