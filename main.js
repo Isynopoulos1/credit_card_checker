@@ -53,7 +53,6 @@ const validateCred = (arr) => {
     for (let j = 0; j < arrayInception.length; j++) {
       if (j % 2 === 0) {
         let num = arrayInception[j] * 2;
-        
         if (num > 9) {
           num -= 9;
         }
@@ -61,6 +60,14 @@ const validateCred = (arr) => {
         arrayInception[j] = num;
       }
     }
+
+    // //Add up all the numbers in the array 
+  
+    let sum = arrayInception.reduce((acc, cur) => acc + cur, 0);
+    arrayInception.length = 0;
+    arrayInception.push(sum)
+
+
   }
   
   return newArr;
@@ -73,8 +80,26 @@ const result = validateCred(batchs);
 //  //output result resut [0, 8, 3, 1, 0, 8,0, 9, 5, 7, 3, 9,6, 5, 8]
 console.log('resut',result);
 
-// //Add up all the numbers in the array as well as the dropped digit from step 1. If the sum modulo 10 is 0 then the array contains a valid number. Conversely, if the result is any number but 0, then the array contains an invalid number.
-// const arrFilter = removedLast;
+
+//Get the dropped digit. If the sum modulo 10 is 0 then the array contains a valid number. Conversely, if the result is any number but 0, then the array contains an invalid number.
+
+
+
+
+const mappedNumbs = batchs.map((arr) => arr.map(num => num))
+console.log('REVERSED',mappedNumbs)
+
+
+const lastNum = mappedNumbs.map(arr => arr[arr.length - 1]);
+console.log('LAST',lastNum);
+//output   8, 9, 6, 5, 6, 5, 3, 4, 5, 4, 4, 9, 3, 3, 3
+
+
+
+
+
+// Conversely, if the result is any number but 0, then the array contains an invalid number.
+
 
 
 
