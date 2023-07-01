@@ -76,25 +76,21 @@ const validateCred = (arr) => {
 
 
 const result = validateCred(batchs);
-//  //output without >9 [resut [0, 8, 12, 1,  0, 8, 0, 9, 14, 7, 12, 9,  6, 5,  8]]
-//  //output result resut [0, 8, 3, 1, 0, 8,0, 9, 5, 7, 3, 9,6, 5, 8]
-console.log('resut',result);
-
 
 //Get the dropped digit. If the sum modulo 10 is 0 then the array contains a valid number. Conversely, if the result is any number but 0, then the array contains an invalid number.
 
 
 
+const originalArrCopy = batchs.map((arr) => arr.map(num => num))
 
-const mappedNumbs = batchs.map((arr) => arr.map(num => num))
-console.log('REVERSED',mappedNumbs)
+result.forEach((arr, index)=> {
+  const lastNum = originalArrCopy[index][originalArrCopy[index].length - 1];
+ arr.forEach((num, i)=>{
+  arr[i]=  num + lastNum; 
+ })
 
-
-const lastNum = mappedNumbs.map(arr => arr[arr.length - 1]);
-console.log('LAST',lastNum);
-//output   8, 9, 6, 5, 6, 5, 3, 4, 5, 4, 4, 9, 3, 3, 3
-
-
+});
+console.log('Test',result)
 
 
 
@@ -102,8 +98,36 @@ console.log('LAST',lastNum);
 
 
 
+const checker = (result)=>{
+  const messages = result.map((num) => {
+    if(num % 10 === 0){
+      return `${num} es un número válido. Pertenece al array en el índice.`;
+    }else{
+      return `${num} es un número NO válido. Pertenece al array en el índice .`;
+    }
 
+  })
+  return messages;
+};
 
+const solution = checker(result);
+console.log(solution)
+
+//to check through the nested array for which numbers are invalid, and return another nested array of invalid cards.
+const findInvalidCards =(nestedArray)=>{
+  const invalidCards =[]
+  for(let i = 0; i < nestedArray.length; i++){
+    const cardNum = nestedArray[i];
+
+    if(!checker(cardNum).includes(isInvalidMessage)){
+      invalidCards.push(cardNum)
+    }
+  }
+  return invalidCards;
+}
+
+const invalidCards = findInvalidCards(batchs);
+console.log(isInvalidMessage,invalidCards)
 
 
 
