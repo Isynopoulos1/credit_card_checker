@@ -129,8 +129,34 @@ const findInvalidCards =(nestedArray)=>{
 const invalidCards = findInvalidCards(batchs);
 console.log(isInvalidMessage,invalidCards)
 
+//to identify the credit card companies that have possibly issued these faulty numbers.
 
+const idInvalidCardCompanies =(invalidCards)=>{
 
+  const companies = [];
+
+  for(let i =0; i < invalidCards.length; i++){
+    const cardNum = invalidCards[i];
+    let company = '';
+
+    if(cardNum[0] === 3){
+      company = 'Amex (American Express)'
+    } else if( cardNum[0] === 4){
+      company = 'Visa'
+    }else if(cardNum[0] === 5){
+      company = '	Mastercard'
+    }else if (cardNum[0] === 6){
+      companies.push('Discover')
+    }else{
+      company = 'company not found'
+    }
+    companies.push({index: i, company: company})
+  }
+ return companies;
+}
+
+const companiesList = idInvalidCardCompanies(invalidCards);
+console.log('THE LIST',companiesList)
 
 
 
