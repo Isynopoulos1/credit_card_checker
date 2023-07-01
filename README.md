@@ -1,5 +1,5 @@
 # Challenge Project: Credit Card Checker
-# Project Goals
+## Project Goals
 
 In this project, I have the role of a clerk who checks if credit cards are valid. 
 
@@ -13,7 +13,7 @@ The calculations in the Luhn algorithm can be broken down as the following steps
 
 
 
-## Technologies
+###Technologies
 
 * 		JavaScript
 * 		Node
