@@ -13,7 +13,7 @@ The calculations in the Luhn algorithm can be broken down as the following steps
 
 
 
-##Technologies
+## Technologies
 
 * 		JavaScript
 * 		Node
